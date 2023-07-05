@@ -1,1 +1,12 @@
 CSV files used
+
+For pulling the CSV file, using the delimiter, printing the date next to the row with the greatest increase/decrease, reading data after the header:
+    comicbooks_solution.py
+    cereal_solution.py
+
+How to set empty variables to refer back to later:
+    census_solution.py
+
+Finding Profit/Losses Average Change:
+    https://stackoverflow.com/questions/74884927/finding-out-how-to-find-out-the-profit-losses-average-of-change-in-this-array
+
