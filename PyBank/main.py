@@ -53,8 +53,9 @@ with open(csvpath) as csvfile:
     average_change = total_change / change_count
     #average of the changes
 
-print("Total Months:", total_months)
-print("Total: $", net_total)
-print("Average Change: $", average_change)
-print("Greatest Increase in Profits:", greatest_increase_date, '($',greatest_increase,')')
-print("Greatest Decrease in Profits:", greatest_decrease_date, '($',greatest_decrease,')')
+f = open("Analysis.txt", "a")
+print("Total Months:", total_months, file=f)
+print("Total: $", net_total, file =f)
+print("Average Change: $", average_change, file =f)
+print("Greatest Increase in Profits:", greatest_increase_date, '($',greatest_increase,')', file =f)
+print("Greatest Decrease in Profits:", greatest_decrease_date, '($',greatest_decrease,')', file =f)
