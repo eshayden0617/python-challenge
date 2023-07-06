@@ -54,6 +54,8 @@ with open(csvpath) as csvfile:
     #average of the changes
 
 f = open("Analysis.txt", "a")
+print("Financial Analysis", file=f)
+print("--------------------------------------------------", file=f)
 print("Total Months:", total_months, file=f)
 print("Total: $", net_total, file =f)
 print("Average Change: $", average_change, file =f)

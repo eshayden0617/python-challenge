@@ -1,40 +1,48 @@
 import os
 import csv
 
-csvpath = os.path.join('PyPoll/election_data.csv')
+csvpath = os.path.join('PyPoll', 'election_data.csv')
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     header = next(csvreader)
 
     total_votes = 0
-    candidates_dict = {}
-    #to store cnaidate name and number of votes
+    candidates = []
+    candidate_votes = {}
+    winning_candidate = ""
+    winning_votes = 0
 
     for row in csvreader:
         total_votes += 1
-        #find total votes
+        #to find the total votes
 
         candidate_name = row[2]
-        if candidate_name not in candidates_dict:
-            candidates_dict[candidate_name] = {'votes': 0, 'percentage': 0}
-        candidates_dict[candidate_name]['votes'] +=1
-        #look through the third row and find candidate names,
-        #if name not in dictionary variable, add it then go to next row along with votes and percentage 
-        #if name in dictionary variable, skip it
+        if candidate_name not in candidates:
+            candidates.append(candidate_name)
+            candidate_votes[candidate_name] = 0
+        candidate_votes[candidate_name] += 1
+        #to find candidates names, votes, and percentage of votes
+        #if not in the candidate list, add the name and begin tracking that candidates vote count
+        #add vote to candidate count
 
-for candidate in candidates_dict:
-    votes = candidates_dict[candidate]['votes']
-    percentage = (votes / total_votes) * 100
-    candidates_dict[candidate]['percentage'] = percentage
-    #finding the number of votes each candidate had and percentage they won by
+f = open("Analysis.txt", "a")
+print("Election Results", file=f)
+print("-------------------------", file=f)
+print("Total Votes:", total_votes, file=f)
+print("-------------------------", file = f)
 
-#f = open("Analysis.txt")
-print("Election Results")
-print("-------------------------")
-print("Total Votes:", total_votes)
-print("-------------------------")
-for candidate, data in candidates_dict.items():
-    votes = data['votes']
-    percentage = data['percentage']
-    print(candidate + ": " + str(percentage) + "% (" + str(votes) + ")")
+for candidate_name, votes in candidate_votes.items():
+    percentage_won = (votes / total_votes) * 100
+    #find the percentage won
+    candidate_results = f"{candidate_name}: {percentage_won:.3f}% ({votes})"
+    #print candidate name, percentage of votes, and votes
+    print(candidate_results, file=f)
+
+    if votes > winning_votes:
+        winning_votes = votes
+        winning_candidate = candidate_name
+       #true then set winning count to that candidate and their votes/% 
+
+print("-------------------------", file=f)
+print("Winner:", winning_candidate, file=f)
